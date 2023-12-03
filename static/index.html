@@ -1,0 +1,108 @@
+<!DOCTYPE <html>
+<html>
+
+<head>
+   <title> Url Shortener </title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<style>
+   * {
+      font-family: 'Poppins', sans-serif;
+      margin: 0px;
+      padding: 0px;
+   }
+
+   h1 {
+      text-align: center;
+   }
+
+   .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
+
+   #form {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: space-around;
+      gap: 2rem;
+   }
+
+   #form button {
+      width: 10rem;
+      font-size: 1.5rem;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      border: 1px black solid;
+      border-radius: 5px;
+      cursor: pointer;
+   }
+
+   #form input {
+      font-size: 1.2rem;
+      padding: 0.2rem;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid black;
+   }
+
+   .container p {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.2rem;
+   }
+
+   .container p img {
+      cursor: pointer;
+   }
+</style>
+
+<body>
+   <div class='container'>
+      <form id='form'>
+         <h1> Url Shortener </h1>
+         <input type='text' id='url' placeholder='Enter URL' name='url' />
+         <button type='submit'> Submit </button>
+      </form>
+
+      <p>
+         <a id='code'> Link </a>
+         <img src="copy.svg" alt="copy" width='20px' height='20px' id='copy' />
+      </p>
+   </div>
+
+   <script>
+      const form = document.getElementById('form');
+      const url = document.getElementById('url');
+      const code = document.getElementById('code');
+      const copy = document.getElementById('copy');
+
+      form.addEventListener('submit', async (e) => {
+         e.preventDefault();
+
+
+         const res = await fetch(`/create?url=${url.value}`)
+
+         code.href = `http://localhost:8080/${await res.text()}`
+         copy.onclick = () => {
+            window.navigator.clipboard.writeText(code.href)
+         }
+
+
+
+      })
+   </script>
+
+</body>
+
+
+</html>
