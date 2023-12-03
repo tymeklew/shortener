@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@£$%^*"
+	CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@£$^*"
 )
 
 var db *sql.DB
@@ -48,7 +48,7 @@ func main() {
 	http.HandleFunc("/create", CreateUrl)
 	http.HandleFunc("/", GetUrl)
 
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":7000", nil)
 }
 
 // POST /create?url=<url>

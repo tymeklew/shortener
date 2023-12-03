@@ -86,15 +86,30 @@
       const code = document.getElementById('code');
       const copy = document.getElementById('copy');
 
+	const real = (text) => {
+			     if (navigator.clipboard) {
+						    navigator.clipboard.writeText(text)
+						  } else {
+								         const input = document.createElement('textarea')
+								         input.value = text
+								         document.body.appendChild(input)
+								         input.select()
+								         document.execCommand('copy')
+								         document.body.removeChild(input)
+								       }
+		   }
+
       form.addEventListener('submit', async (e) => {
          e.preventDefault();
 
-
+				    }
          const res = await fetch(`/create?url=${url.value}`)
 
-         code.href = `http://localhost:8080/${await res.text()}`
+
+
+         code.href = `http://short.fimsh.com/${await res.text()}`
          copy.onclick = () => {
-            window.navigator.clipboard.writeText(code.href)
+			    real(code.href)
          }
 
 
